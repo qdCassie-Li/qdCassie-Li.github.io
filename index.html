@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yuqing Li | 李雨晴</title>
+  <meta name="description" content="Yuqing Li academic homepage - long-context retrieval, reranking, memory-aware RAG and multimodal reasoning.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #222;
+      --muted: #666;
+      --line: #e8e8e8;
+      --soft: #f7f7f7;
+      --accent: #173256;
+      --accent-soft: #5b6c82;
+      --max-width: 1220px;
+      --sidebar-width: 292px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-brand {
+      color: #222;
+      font-size: 15px;
+      font-weight: 800;
+      margin-right: 22px;
+      letter-spacing: 0.01em;
+    }
+
+    .nav a {
+      color: #555;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav a.active {
+      color: #222;
+    }
+
+    .lang-toggle {
+      border: none;
+      background: transparent;
+      color: #333;
+      padding: 0;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 28px 24px 60px;
+      display: grid;
+      grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+      gap: 42px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 92px;
+      align-self: start;
+    }
+
+    .avatar {
+      width: 124px;
+      height: 124px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 18px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+    }
+
+    .name {
+      font-size: 28px;
+      font-weight: 650;
+      line-height: 1.15;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .org,
+    .bio {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .profile-tags {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .profile-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+      color: #4c5560;
+      font-size: 12px;
+      line-height: 1.3;
+      font-weight: 600;
+    }
+
+    .sidebar-links {
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-links a,
+    .sidebar-links span {
+      color: #333;
+      font-size: 15px;
+      word-break: break-word;
+      font-weight: 600;
+    }
+
+    .sidebar-links a,
+    .location-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .contact-icon {
+      width: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex: 0 0 16px;
+    }
+
+    .hf-icon svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    .content section {
+      scroll-margin-top: 84px;
+      margin-bottom: 34px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin: 4px 0 16px;
+      line-height: 1.2;
+      color: #3f444a;
+    }
+
+    .section-icon {
+      font-size: 22px;
+      line-height: 1;
+      transform: translateY(-1px);
+    }
+
+    .subsection-title {
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin: 28px 0 14px;
+      padding-top: 4px;
+      border-top: 1px solid var(--line);
+      color: #444b52;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .lead p {
+      margin: 0 0 12px;
+    }
+
+    .news-list,
+    .award-list,
+    .compact-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .news-list li,
+    .award-list li,
+    .compact-list li {
+      margin: 10px 0;
+      color: #555;
+    }
+
+    .compact-list strong,
+    .award-list strong {
+      color: #353a40;
+    }
+
+    .featured-grid {
+      display: grid;
+      gap: 30px;
+    }
+
+    .paper-card {
+      display: grid;
+      grid-template-columns: 45% minmax(0, 1fr);
+      gap: 26px;
+      align-items: start;
+    }
+
+    .paper-card.text-only {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .paper-figure {
+      position: relative;
+      width: 100%;
+      align-self: start;
+    }
+
+    .paper-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9.5;
+      display: block;
+      object-fit: cover;
+      border: none;
+      border-radius: 0;
+      background: var(--soft);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+    }
+
+    .paper-fallback {
+      display: none;
+      width: 100%;
+      aspect-ratio: 16 / 9.5;
+      padding: 22px;
+      background: linear-gradient(135deg, #193a66 0%, #335a8c 52%, #8fa4bf 100%);
+      color: #fff;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .paper-fallback small {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.78);
+      font-weight: 700;
+    }
+
+    .paper-fallback strong {
+      max-width: 82%;
+      font-size: 30px;
+      line-height: 0.96;
+      letter-spacing: -0.05em;
+      font-weight: 700;
+    }
+
+    .paper-fallback span {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.88);
+      font-weight: 600;
+    }
+
+    .paper-figure.no-image .paper-fallback,
+    .paper-figure.thumb-failed .paper-fallback {
+      display: flex;
+    }
+
+    .paper-figure.no-image .paper-thumb,
+    .paper-figure.thumb-failed .paper-thumb {
+      display: none;
+    }
+
+    .paper-badge {
+      position: absolute;
+      top: 12px;
+      left: -10px;
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 0;
+      background: #153b9b;
+      color: #fff;
+      font-size: 12px;
+      line-height: 1.1;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      text-transform: none;
+      z-index: 2;
+    }
+
+    .paper-title {
+      margin: 0 0 6px;
+      font-size: 16px;
+      line-height: 1.45;
+      font-weight: 600;
+      color: #4b5056;
+    }
+
+    .paper-inline-badge {
+      display: inline-block;
+      margin: 0 0 10px;
+      padding: 3px 10px;
+      background: #153b9b;
+      color: #fff;
+      font-size: 12px;
+      line-height: 1.1;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+
+    .paper-authors {
+      margin: 0 0 10px;
+      font-size: 15px;
+      line-height: 1.45;
+      color: #60656b;
+    }
+
+    .paper-desc {
+      margin-bottom: 10px;
+      color: #555;
+      font-size: 15px;
+    }
+
+    .paper-links {
+      font-size: 15px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .paper-links a,
+    .paper-links button.link-btn {
+      color: var(--accent);
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .paper-links a:hover,
+    .paper-links button.link-btn:hover {
+      text-decoration: underline;
+    }
+
+    .paper-links .sep {
+      color: #999;
+      margin: 0 6px;
+    }
+
+    .bibtex {
+      display: none;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin-top: 10px;
+      padding: 12px 14px;
+      background: #fbfbfc;
+      border-left: 3px solid #d7dce3;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .paper-card.show-bibtex .bibtex {
+      display: block;
+    }
+
+    .author-self {
+      font-weight: 700;
+      font-style: italic;
+      color: #353a40;
+    }
+
+    .footer {
+      color: #888;
+      font-size: 13px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+      margin-top: 24px;
+    }
+
+    @media (max-width: 980px) {
+      .page {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .paper-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .topbar-inner {
+        align-items: flex-start;
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+
+      .nav {
+        gap: 12px;
+      }
+
+      .nav a {
+        font-size: 13px;
+      }
+
+      .section-title {
+        font-size: 26px;
+      }
+
+      .subsection-title {
+        font-size: 20px;
+      }
+
+      .name {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <nav class="nav" id="nav"></nav>
+      <button class="lang-toggle" id="langToggle">English</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <aside class="sidebar">
+      <img
+        class="avatar"
+        id="profileAvatar"
+        src="avatar.jpg"
+        alt="Yuqing Li portrait"
+        onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Yuqing+Li&size=256&background=173256&color=ffffff&font-size=0.36';"
+      >
+      <div class="name" id="profileName"></div>
+      <div class="org" id="profileOrg"></div>
+      <div class="bio" id="profileBio"></div>
+      <div class="profile-tags" id="profileTags"></div>
+      <div class="sidebar-links" id="sidebarLinks"></div>
+    </aside>
+
+    <div class="content">
+      <section id="home">
+        <div class="lead" id="homeLead"></div>
+
+        <h3 class="subsection-title" id="researchTitle"></h3>
+        <ul class="compact-list" id="researchList"></ul>
+
+        <h3 class="subsection-title" id="experienceTitle"></h3>
+        <ul class="compact-list" id="experienceList"></ul>
+      </section>
+
+      <section id="news">
+        <h2 class="section-title"><span class="section-icon">🔥</span><span id="newsTitle"></span></h2>
+        <ul class="news-list" id="newsList"></ul>
+      </section>
+
+      <section id="publications">
+        <h2 class="section-title"><span class="section-icon">📝</span><span id="publicationsTitle"></span></h2>
+
+        <h3 class="subsection-title" id="featuredPreprintTitle"></h3>
+        <div class="featured-grid" id="featuredPreprint"></div>
+
+        <h3 class="subsection-title" id="featuredPublishedTitle"></h3>
+        <div class="featured-grid" id="featuredPublished"></div>
+      </section>
+
+      <section id="awards">
+        <h2 class="section-title"><span class="section-icon">🏆</span><span id="awardsTitle"></span></h2>
+        <ul class="award-list" id="awardList"></ul>
+      </section>
+
+      <div class="footer" id="footerText"></div>
+    </div>
+  </main>
+
+  <script>
+    const siteData = {
+      profile: {
+        zh: {
+          name: "李雨晴",
+          org: "中国科学院信息工程研究所",
+          bio: "博士生 · 腾讯微信事业群（WXG）模式识别中心研究实习",
+          location: "Beijing, China",
+          tags: ["RAG", "Agent Memory", "Multimodal Analysis"]
+        },
+        en: {
+          name: "Yuqing Li",
+          org: "Institute of Information Engineering, Chinese Academy of Sciences",
+          bio: "Ph.D. Candidate · Research Intern at Tencent WXG Pattern Recognition Center",
+          location: "Beijing, China",
+          tags: ["RAG", "Agent Memory", "Multimodal Analysis"]
+        }
+      },
+      contacts: {
+        zh: [
+          { label: "Email", href: "mailto:liyuqing@iie.ac.cn", icon: "fas fa-envelope" },
+          { label: "Google Scholar", href: "https://scholar.google.com.au/citations?user=MNn2rBsAAAAJ", icon: "ai ai-google-scholar" },
+          { label: "GitHub", href: "https://github.com/qdCassie-Li", icon: "fab fa-github" },
+          { label: "Hugging Face", href: "https://huggingface.co/MindscapeRAG", icon: "custom-huggingface" }
+        ],
+        en: [
+          { label: "Email", href: "mailto:liyuqing@iie.ac.cn", icon: "fas fa-envelope" },
+          { label: "Google Scholar", href: "https://scholar.google.com.au/citations?user=MNn2rBsAAAAJ", icon: "ai ai-google-scholar" },
+          { label: "GitHub", href: "https://github.com/qdCassie-Li", icon: "fab fa-github" },
+          { label: "Hugging Face", href: "https://huggingface.co/MindscapeRAG", icon: "custom-huggingface" }
+        ]
+      },
+      nav: {
+        zh: [
+          { id: "home", label: "About Me" },
+          { id: "news", label: "动态" },
+          { id: "publications", label: "论文" },
+          { id: "awards", label: "荣誉" }
+        ],
+        en: [
+          { id: "home", label: "About Me" },
+          { id: "news", label: "News" },
+          { id: "publications", label: "Publications" },
+          { id: "awards", label: "Awards & Highlights" }
+        ]
+      },
+      text: {
+        zh: {
+          homeLead: [
+            "你好！我是<a href='https://www.iie.ac.cn/' target='_blank' rel='noreferrer'>中国科学院信息工程研究所</a>博士生，导师为<a href='https://people.ucas.ac.cn/~linzheng' target='_blank' rel='noreferrer'>林政</a>研究员。目前我在<strong>腾讯微信事业群（WXG）模式识别中心</strong>从事研究实习，Mentor 为 <a href='https://sites.google.com/site/moyunlp/' target='_blank' rel='noreferrer'>Mo Yu</a>。",
+            "我的研究主要围绕长上下文检索与重排、Agent Memory、以及多模态应用分析展开，尤其关注模型如何更稳定地定位证据、组织长期信息，并在复杂场景中做出更可靠的判断。"
+          ],
+          researchTitle: "研究兴趣",
+          experienceTitle: "教育与经历",
+          newsTitle: "动态",
+          publicationsTitle: "论文",
+          featuredPreprintTitle: "预印与近期工作",
+          featuredPublishedTitle: "代表性论文",
+          awardsTitle: "荣誉",
+          footerText: "Academic homepage. Powered by GitHub Pages."
+        },
+        en: {
+          homeLead: [
+            "Hi! I am a Ph.D. candidate at the <a href='https://www.iie.ac.cn/' target='_blank' rel='noreferrer'>Institute of Information Engineering, Chinese Academy of Sciences</a>, advised by <a href='https://people.ucas.ac.cn/~linzheng' target='_blank' rel='noreferrer'>Prof. Zheng Lin</a>. I am currently a research intern at the <strong>Pattern Recognition Center, Tencent WeChat Group (WXG)</strong>, mentored by <a href='https://sites.google.com/site/moyunlp/' target='_blank' rel='noreferrer'>Mo Yu</a>.",
+            "My research centers on long-context retrieval and reranking, agent memory, and multimodal application analysis. I am particularly interested in how models can retrieve better evidence, organize long-term information, and make more reliable decisions in complex scenarios."
+          ],
+          researchTitle: "Research Interests",
+          experienceTitle: "Education & Experience",
+          newsTitle: "News",
+          publicationsTitle: "Publications",
+          featuredPreprintTitle: "Recent Preprints",
+          featuredPublishedTitle: "Representative Papers",
+          awardsTitle: "Awards & Highlights",
+          footerText: "Academic homepage. Powered by GitHub Pages."
+        }
+      },
+      research: {
+        zh: [
+          "<strong>RAG：</strong>关注稠密检索、重排、动态检索等问题，尤其是长上下文场景下证据定位、候选排序和检索质量对下游生成的影响。",
+          "<strong>Agent Memory：</strong>关注 training-free 的记忆框架设计与使用，希望在不额外训练的前提下提升 agent 对长期信息的组织、访问与利用能力。",
+          "<strong>Multimodal Applications：</strong>关注情感分析与抽取、虚假新闻检测等任务，重点分析解释信息和外部证据如何帮助模型做出更稳健判断。"
+        ],
+        en: [
+          "<strong>RAG：</strong> I work on dense retrieval, reranking, and dynamic retrieval, with a particular focus on evidence localization and candidate ranking under long-context settings.",
+          "<strong>Agent Memory：</strong> I study training-free memory frameworks that improve how agents organize, access, and use long-term information without additional model training.",
+          "<strong>Multimodal Applications：</strong> I am also interested in multimodal tasks such as sentiment analysis and fake news detection, especially how explanations and external evidence improve robustness."
+        ]
+      },
+      experience: {
+        zh: [
+          "<strong>2025 - 至今 · 腾讯微信事业群（WXG）模式识别中心</strong>，研究实习，Mentor 为 <a href='https://sites.google.com/site/moyunlp/' target='_blank' rel='noreferrer'>Mo Yu</a>。",
+          "<strong>2022 - 2027.6 (Expected) · 中国科学院信息工程研究所</strong>，博士生，导师为林政研究员。",
+          "<strong>2018 - 2022 · 青岛大学</strong>，计算机科学与技术本科。"
+        ],
+        en: [
+          "<strong>2025 - Present · Tencent WeChat Group (WXG), Pattern Recognition Center</strong>, Research Intern, mentored by <a href='https://sites.google.com/site/moyunlp/' target='_blank' rel='noreferrer'>Mo Yu</a>.",
+          "<strong>2022 - Present · Institute of Information Engineering, CAS</strong>, Ph.D. in Computer Application Technology, advised by Prof. Zheng Lin.",
+          "<strong>2018 - 2022 · Qingdao University</strong>, B.E. in Computer Science and Technology."
+        ]
+      },
+      news: [
+        {
+          zh: "<em>2026.04</em>：🎉 <strong>Situated Embedding Models for Context-Aware Dense Retrieval</strong> 被 <strong>ACL 2026</strong> 主会录用。",
+          en: "<em>2026.04</em>: 🎉 <strong>Situated Embedding Models for Context-Aware Dense Retrieval</strong> was accepted to the <strong>ACL 2026</strong> main conference ."
+        },
+        {
+          zh: "<em>2026.04</em>：🎉 <strong>ExDR: Explanation-driven Dynamic Retrieval Enhancement for Multimodal Fake News Detection</strong> 被 <strong>SIGIR 2026</strong> 录用。",
+          en: "<em>2026.04</em>: 🎉 <strong>ExDR: Explanation-driven Dynamic Retrieval Enhancement for Multimodal Fake News Detection</strong> was accepted by <strong>SIGIR 2026</strong> ."
+        },
+        {
+          zh: "<em>2026.03</em>：🎉 <strong>SIR-LMM: Learning Domain-Invariant Rationales for Out-of-Distribution Hateful Meme Detection</strong> 被 <strong>IJCNN 2026</strong> 录用。",
+          en: "<em>2026.03</em>: 🎉 <strong>SIR-LMM: Learning Domain-Invariant Rationales for Out-of-Distribution Hateful Meme Detection</strong> was accepted by <strong>IJCNN 2026</strong> ."
+        },
+        {
+          zh: "<em>2026.02</em>：📝 <strong>QRRanker: Query-focused and Memory-aware Reranker for Long Context Processing</strong> 发布于 <a href='https://arxiv.org/abs/2602.12192' target='_blank' rel='noreferrer'>arXiv</a>，并入选 <a href='https://huggingface.co/papers/2602.12192' target='_blank' rel='noreferrer'>Hugging Face Daily Paper #2</a>。",
+          en: "<em>2026.02</em>: 📝 <strong>QRRanker: Query-focused and Memory-aware Reranker for Long Context Processing</strong> was released on <a href='https://arxiv.org/abs/2602.12192' target='_blank' rel='noreferrer'>arXiv</a> and selected as <a href='https://huggingface.co/papers/2602.12192' target='_blank' rel='noreferrer'>Hugging Face Daily Paper #2</a>."
+        },
+        {
+          zh: "<em>2026.01</em>：🎉 <strong>Event Category Discovery through Multi-Dimensional Event Feature Construction from Textual Structure</strong>被 <strong>DASFAA 2026</strong> 录用。",
+          en: "<em>2026.01</em>: 🎉 <strong>Event Category Discovery through Multi-Dimensional Event Feature Construction from Textual Structure</strong> was accepted by <strong>DASFAA 2026</strong> ."
+        },
+        {
+          zh: "<em>2026.01</em>：🎉 <strong>Training-Free Prompt Compression via Shallow-Layer Structural-Semantic Fusion</strong>被 <strong>ICASSP 2026</strong> 录用。",
+          en: "<em>2026.01</em>: 🎉 <strong>Training-Free Prompt Compression via Shallow-Layer Structural-Semantic Fusion</strong> was accepted by <strong>ICASSP 2026</strong> ."
+        },
+        {
+          zh: "<em>2025.12</em>：📝 <strong>Mindscape-Aware Retrieval Augmented Generation sfor Improved Long Context Understanding</strong> 发布于 <a href='https://arxiv.org/abs/2512.17220' target='_blank' rel='noreferrer'>arXiv</a>，并入选 <a href='https://huggingface.co/papers/2512.17220' target='_blank' rel='noreferrer'>Hugging Face Daily Paper #1</a>。",
+          en: "<em>2025.12</em>: 📝 <strong>Mindscape-Aware Retrieval Augmented Generation for Improved Long Context Understanding</strong> was released on <a href='https://arxiv.org/abs/2512.17220' target='_blank' rel='noreferrer'>arXiv</a> and selected as <a href='https://huggingface.co/papers/2512.17220' target='_blank' rel='noreferrer'>Hugging Face Daily Paper #1</a>."
+        },
+         {
+          zh: "<em>2025.07</em>：🎉 <strong>EventPuzzle: A Benchmark for Multi-Perspective Event Prediction Based on Event Arguments</strong>被 <strong>CIKM 2025</strong> 录用。",
+          en: "<em>2025.07</em>: 🎉 <strong>EventPuzzle: A Benchmark for Multi-Perspective Event Prediction Based on Event Arguments</strong> was accepted by <strong>CIKM 2025</strong> ."
+        },
+        {
+          zh: "<em>2025.07</em>：🏆 获得中文信息学会情感计算大会技术评测<strong>冠军（队员）</strong>（细粒度比拟句情绪分析）。",
+          en: "<em>2025.07</em>: 🏆 Won <strong>1st place</strong> in the CCF Emotion Computing evaluation on fine-grained figurative sentiment analysis."
+        },
+        {
+          zh: "<em>2025.04</em>：🎉 论文 <strong>Incorporating Communication Style and Interaction of Speakers for Sarcasm Explanation in Dialogue</strong> 被 <strong>SIGIR 2025</strong> 录用。",
+          en: "<em>2025.04</em>: 🎉 Our paper <strong>Incorporating Communication Style and Interaction of Speakers for Sarcasm Explanation in Dialogue</strong> was accepted by <strong>SIGIR 2025</strong> ."
+        },
+        {
+          zh: "<em>2024.07</em>：🏅 中文信息学会情感计算大会技术评测<strong>冠军（队长）</strong>（结合用户画像信息中文情绪分类）。",
+          en: "<em>2024.07</em>: 🏅 I won <strong>1st place</strong> in the CCF Emotion Computing evaluation on Chinese emotion classification with user profiling."
+        },
+        {
+          zh: "<em>2024.04</em>：🏅 <strong>Dynamic multi-scale context aggregation for conversational aspect-based sentiment quadruple analysis</strong> 被 <strong>ICASSP 2024</strong> 录用",
+          en: "<em>2024.04</em>: 🏅 <strong>Dynamic multi-scale context aggregation for conversational aspect-based sentiment quadruple analysis</strong> was accepted by <strong>ICASSP 2024</strong> ."
+        }
+      ],
+      featuredPreprint: [
+        {
+          image: "https://ar5iv.labs.arxiv.org/html/2602.12192/assets/x1.png",
+          badge: { zh: "arXiv 2026", en: "arXiv 2026" },
+          coverLabel: { zh: "Reranking", en: "Reranking" },
+          shortTitle: "QRRanker",
+          coverNote: { zh: "Long-context reranking", en: "Long-context reranking" },
+          title: {
+            zh: "Query-focused and Memory-aware Reranker for Long Context Processing",
+            en: "Query-focused and Memory-aware Reranker for Long Context Processing"
+          },
+          authors: {
+            zh: "Yuqing Li*",
+            en: "Yuqing Li*"
+          },
+          summary: {
+            zh: "长上下文 reranking 常把候选片段逐条独立判断，忽略候选列表之间的相对相关性与记忆线索。QRRanker 将 LLM retrieval heads 转换为 listwise relevance estimator，在长对话记忆理解和 long-context reranking 上都取得了更强结果。",
+            en: "Long-context reranking often judges each candidate passage independently and misses relative relevance and memory cues across the candidate list. QRRanker turns LLM retrieval heads into a listwise relevance estimator and improves both reranking quality and long-dialogue memory understanding."
+          },
+          paperUrl: "https://arxiv.org/abs/2602.12192",
+          codeUrl: "#",
+          resourceLinks: [
+            { label: "HF Daily #2", url: "https://huggingface.co/papers/2602.12192" }
+          ]
+        },
+        {
+          image: "https://ar5iv.labs.arxiv.org/html/2512.17220/assets/x1.png",
+          badge: { zh: "arXiv 2025", en: "arXiv 2025" },
+          coverLabel: { zh: "RAG", en: "RAG" },
+          shortTitle: "MiA-RAG",
+          coverNote: { zh: "Memory-aware generation", en: "Memory-aware generation" },
+          title: {
+            zh: "Mindscape-Aware Retrieval Augmented Generation for Improved Long Context Understanding",
+            en: "Mindscape-Aware Retrieval Augmented Generation for Improved Long Context Understanding"
+          },
+          authors: {
+            zh: "Yuqing Li*",
+            en: "Yuqing Li*"
+          },
+          summary: {
+            zh: "传统 RAG 主要依赖局部证据检索，难以稳定把握长文档的整体结构。MiA-RAG 显式构建 mindscape，并同时条件化 retrieval 与 generation，在多项长上下文和双语 benchmark 上稳定优于基线。",
+            en: "Conventional RAG mostly relies on local evidence and struggles to model the global structure of long documents. MiA-RAG explicitly builds a mindscape and conditions both retrieval and generation on it, delivering consistent gains on long-context and bilingual benchmarks."
+          },
+          paperUrl: "https://arxiv.org/abs/2512.17220",
+          codeUrl: "#",
+          resourceLinks: [
+            { label: "HF Daily #1", url: "https://huggingface.co/papers/2512.17220" }
+          ]
+        }
+      ],
+      featuredPublished: [
+        {
+          image: "https://ar5iv.labs.arxiv.org/html/2508.01959/assets/x1.png",
+          badge: { zh: "ACL 2026", en: "ACL 2026" },
+          coverLabel: { zh: "Retrieval", en: "Retrieval" },
+          shortTitle: "SitEmb",
+          coverNote: { zh: "Situated embedding", en: "Situated embedding" },
+          title: {
+            zh: "SitEmb-v1.5: Improved Context-Aware Dense Retrieval",
+            en: "SitEmb-v1.5: Improved Context-Aware Dense Retrieval"
+          },
+          authors: {
+            zh: "Junjie Wu, Jiangnan Li, Yuqing Li",
+            en: "Junjie Wu, Jiangnan Li, Yuqing Li"
+          },
+          summary: {
+            zh: "把 chunk 做大并不等于更会检索。SitEmb 学习“短块 + 上下文条件化”的 situated embedding，在 dense retrieval 场景中兼顾可定位证据和上下文感知能力，并带来显著提升。",
+            en: "Larger chunks do not automatically yield better retrieval. SitEmb learns situated embeddings with short chunks plus contextual conditioning, improving dense retrieval while preserving precise evidence localization."
+          },
+          paperUrl: "https://arxiv.org/abs/2508.01959",
+          codeUrl: "#",
+          resourceLinks: []
+        },
+        {
+          image: "https://ar5iv.labs.arxiv.org/html/2601.15820/assets/x1.png",
+          badge: { zh: "SIGIR 2026", en: "SIGIR 2026" },
+          coverLabel: { zh: "Multimodal", en: "Multimodal" },
+          shortTitle: "ExDR",
+          coverNote: { zh: "Explanation-driven retrieval", en: "Explanation-driven retrieval" },
+          title: {
+            zh: "ExDR: Explanation-driven Dynamic Retrieval Enhancement for Multimodal Fake News Detection",
+            en: "ExDR: Explanation-driven Dynamic Retrieval Enhancement for Multimodal Fake News Detection"
+          },
+          authors: {
+            zh: "Guoxuan Ding*, Yuqing Li*",
+            en: "Guoxuan Ding*, Yuqing Li*"
+          },
+          summary: {
+            zh: "多模态假新闻检测中的动态检索往往不清楚何时该检、该检什么。ExDR 使用 explanation 同时驱动 trigger 与 retrieval，并结合 entity-aware 与 deception-aware evidence，在检测效果与检索质量上同步提升。",
+            en: "Dynamic retrieval in multimodal fake news detection often fails to determine when and what to retrieve. ExDR uses explanations to guide both triggering and evidence retrieval, improving both retrieval quality and final detection performance."
+          },
+          paperUrl: "https://arxiv.org/abs/2601.15820",
+          codeUrl: "#",
+          resourceLinks: []
+        },
+        {
+          badge: { zh: "SIGIR 2025", en: "SIGIR 2025" },
+          coverLabel: { zh: "Dialogue", en: "Dialogue" },
+          shortTitle: "CISI",
+          coverNote: { zh: "Sarcasm explanation", en: "Sarcasm explanation" },
+          title: {
+            zh: "Incorporating Communication Style and Interaction of Speakers for Sarcasm Explanation in Dialogue",
+            en: "Incorporating Communication Style and Interaction of Speakers for Sarcasm Explanation in Dialogue"
+          },
+          authors: {
+            zh: "Yuqing Li",
+            en: "Yuqing Li"
+          },
+          summary: {
+            zh: "讽刺解释不只是句子级理解问题，还会受到说话者沟通风格和对话交互方式影响。这项工作把 communication style、interaction structure 与多模态讽刺线索一起建模，在对话讽刺解释任务上取得更强结果。",
+            en: "Sarcasm explanation is not purely a sentence-level understanding problem; it also depends on speaker style and interaction patterns. This work models communication style, interaction structure, and multimodal cues together for stronger dialogue sarcasm explanation."
+          },
+          paperUrl: "https://sigir2025.dei.unipd.it/detailed-program/paper?paper=cfecdb276f634854f3ef915e2e980c31",
+          codeUrl: "#",
+          resourceLinks: []
+        },
+        {
+          badge: { zh: "ICASSP 2024", en: "ICASSP 2024" },
+          coverLabel: { zh: "Sentiment", en: "Sentiment" },
+          shortTitle: "DMCA",
+          coverNote: { zh: "Conversational sentiment", en: "Conversational sentiment" },
+          title: {
+            zh: "Dynamic Multi-scale Context Aggregation for Conversational Aspect-based Sentiment Quadruple Analysis",
+            en: "Dynamic Multi-scale Context Aggregation for Conversational Aspect-based Sentiment Quadruple Analysis"
+          },
+          authors: {
+            zh: "Yuqing Li",
+            en: "Yuqing Li"
+          },
+          summary: {
+            zh: "DiaASQ 中的 target、aspect、opinion 与 sentiment 经常跨越多个 utterance，单句编码很难抓住关键依赖。DMCA 通过 multi-scale utterance windows 与 dynamic hierarchical aggregation 聚合上下文，在该任务上取得 SOTA 结果。",
+            en: "In DiaASQ, targets, aspects, opinions, and sentiments often span multiple utterances, making sentence-level encoding insufficient. DMCA aggregates context with multi-scale utterance windows and dynamic hierarchical aggregation, achieving state-of-the-art performance."
+          },
+          paperUrl: "https://www.catalyzex.com/paper/dynamic-multi-scale-context-aggregation-for",
+          codeUrl: "#",
+          resourceLinks: []
+        }
+      ],
+      awards: [
+        {
+          zh: "<strong>2025</strong>：获得中文信息学会情感计算大会技术评测冠军（细粒度比拟句情绪分析）。",
+          en: "<strong>2025</strong>: Won 1st place in the CCF Emotion Computing evaluation on fine-grained figurative sentiment analysis."
+        },
+        {
+          zh: "<strong>2024</strong>：获得中文信息学会情感计算大会技术评测冠军（结合用户画像信息中文情绪分类）。",
+          en: "<strong>2024</strong>: Won 1st place in the CCF Emotion Computing evaluation on Chinese emotion classification with user profiling."
+        }
+      ]
+    };
+
+    let currentLang = "zh";
+    let sectionObserver;
+    const huggingFaceIcon = `
+      <svg fill="#FFD21E" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12.025 1.13c-5.77 0-10.449 4.647-10.449 10.378 0 1.112.178 2.181.503 3.185.064-.222.203-.444.416-.577a.96.96 0 0 1 .524-.15c.293 0 .584.124.84.284.278.173.48.408.71.694.226.282.458.611.684.951v-.014c.017-.324.106-.622.264-.874s.403-.487.762-.543c.3-.047.596.06.787.203s.31.313.4.467c.15.257.212.468.233.542.01.026.653 1.552 1.657 2.54.616.605 1.01 1.223 1.082 1.912.055.537-.096 1.059-.38 1.572.637.121 1.294.187 1.967.187.657 0 1.298-.063 1.921-.178-.287-.517-.44-1.041-.384-1.581.07-.69.465-1.307 1.081-1.913 1.004-.987 1.647-2.513 1.657-2.539.021-.074.083-.285.233-.542.09-.154.208-.323.4-.467a1.08 1.08 0 0 1 .787-.203c.359.056.604.29.762.543s.247.55.265.874v.015c.225-.34.457-.67.683-.952.23-.286.432-.52.71-.694.257-.16.547-.284.84-.285a.97.97 0 0 1 .524.151c.228.143.373.388.43.625l.006.04a10.3 10.3 0 0 0 .534-3.273c0-5.731-4.678-10.378-10.449-10.378M8.327 6.583a1.5 1.5 0 0 1 .713.174 1.487 1.487 0 0 1 .617 2.013c-.183.343-.762-.214-1.102-.094-.38.134-.532.914-.917.71a1.487 1.487 0 0 1 .69-2.803m7.486 0a1.487 1.487 0 0 1 .689 2.803c-.385.204-.536-.576-.916-.71-.34-.12-.92.437-1.103.094a1.487 1.487 0 0 1 .617-2.013 1.5 1.5 0 0 1 .713-.174m-10.68 1.55a.96.96 0 1 1 0 1.921.96.96 0 0 1 0-1.92m13.838 0a.96.96 0 1 1 0 1.92.96.96 0 0 1 0-1.92M8.489 11.458c.588.01 1.965 1.157 3.572 1.164 1.607-.007 2.984-1.155 3.572-1.164.196-.003.305.12.305.454 0 .886-.424 2.328-1.563 3.202-.22-.756-1.396-1.366-1.63-1.32q-.011.001-.02.006l-.044.026-.01.008-.03.024q-.018.017-.035.036l-.032.04a1 1 0 0 0-.058.09l-.014.025q-.049.088-.11.19a1 1 0 0 1-.083.116 1.2 1.2 0 0 1-.173.18q-.035.029-.075.058a1.3 1.3 0 0 1-.251-.243 1 1 0 0 1-.076-.107c-.124-.193-.177-.363-.337-.444-.034-.016-.104-.008-.2.022q-.094.03-.216.087-.06.028-.125.063l-.13.074q-.067.04-.136.086a3 3 0 0 0-.135.096 3 3 0 0 0-.26.219 2 2 0 0 0-.12.121 2 2 0 0 0-.106.128l-.002.002a2 2 0 0 0-.09.132l-.001.001a1.2 1.2 0 0 0-.105.212q-.013.036-.024.073c-1.139-.875-1.563-2.317-1.563-3.203 0-.334.109-.457.305-.454m.836 10.354c.824-1.19.766-2.082-.365-3.194-1.13-1.112-1.789-2.738-1.789-2.738s-.246-.945-.806-.858-.97 1.499.202 2.362c1.173.864-.233 1.45-.685.64-.45-.812-1.683-2.896-2.322-3.295s-1.089-.175-.938.647 2.822 2.813 2.562 3.244-1.176-.506-1.176-.506-2.866-2.567-3.49-1.898.473 1.23 2.037 2.16c1.564.932 1.686 1.178 1.464 1.53s-3.675-2.511-4-1.297c-.323 1.214 3.524 1.567 3.287 2.405-.238.839-2.71-1.587-3.216-.642-.506.946 3.49 2.056 3.522 2.064 1.29.33 4.568 1.028 5.713-.624m5.349 0c-.824-1.19-.766-2.082.365-3.194 1.13-1.112 1.789-2.738 1.789-2.738s.246-.945.806-.858.97 1.499-.202 2.362c-1.173.864.233 1.45.685.64.451-.812 1.683-2.896 2.322-3.295s1.089-.175.938.647-2.822 2.813-2.562 3.244 1.176-.506 1.176-.506 2.866-2.567 3.49-1.898-.473 1.23-2.037 2.16c-1.564.932-1.686 1.178-1.464 1.53s3.675-2.511 4-1.297c.323 1.214-3.524 1.567-3.287 2.405.238.839 2.71-1.587 3.216-.642.506.946-3.49 2.056-3.522 2.064-1.29.33-4.568 1.028-5.713-.624"/>
+      </svg>
+    `;
+
+    function highlightSelfName(text) {
+      return text
+        .replaceAll("Yuqing Li", "<span class='author-self'>Yuqing Li</span>")
+        .replaceAll("李雨晴", "<span class='author-self'>李雨晴</span>");
+    }
+
+    function escapeHtml(text) {
+      return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function createNav() {
+      const nav = document.getElementById("nav");
+      const brand = "<a href='#home' class='nav-brand'>Homepage</a>";
+      const items = siteData.nav[currentLang].map((item) => `<a href="#${item.id}">${item.label}</a>`).join("");
+      nav.innerHTML = brand + items;
+    }
+
+    function renderContactIcon(item) {
+      if (item.icon === "custom-huggingface") {
+        return `<span class="contact-icon hf-icon">${huggingFaceIcon}</span>`;
+      }
+
+      return `<span class="contact-icon"><i class="${item.icon}"></i></span>`;
+    }
+
+    function renderProfile() {
+      const profile = siteData.profile[currentLang];
+      document.getElementById("profileName").textContent = profile.name;
+      document.getElementById("profileOrg").textContent = profile.org;
+      document.getElementById("profileBio").textContent = profile.bio;
+      document.getElementById("profileTags").innerHTML = profile.tags
+        .map((tag) => `<span class="profile-tag">${tag}</span>`)
+        .join("");
+
+      const links = [
+        `<span class="location-item"><span class="contact-icon"><i class="fas fa-location-dot"></i></span><span>${profile.location}</span></span>`
+      ].concat(
+        siteData.contacts[currentLang].map(
+          (item) => `<a href="${item.href}" target="_blank" rel="noreferrer">${renderContactIcon(item)}<span>${item.label}</span></a>`
+        )
+      );
+
+      document.getElementById("sidebarLinks").innerHTML = links.join("");
+    }
+
+    function renderHome() {
+      const text = siteData.text[currentLang];
+      document.getElementById("homeLead").innerHTML = text.homeLead.map((item) => `<p>${item}</p>`).join("");
+      document.getElementById("researchTitle").textContent = text.researchTitle;
+      document.getElementById("experienceTitle").textContent = text.experienceTitle;
+      document.getElementById("researchList").innerHTML = siteData.research[currentLang].map((item) => `<li>${item}</li>`).join("");
+      document.getElementById("experienceList").innerHTML = siteData.experience[currentLang].map((item) => `<li>${item}</li>`).join("");
+    }
+
+    function renderStaticText() {
+      const text = siteData.text[currentLang];
+      document.getElementById("newsTitle").textContent = text.newsTitle;
+      document.getElementById("publicationsTitle").textContent = text.publicationsTitle;
+      document.getElementById("featuredPublishedTitle").textContent = text.featuredPublishedTitle;
+      document.getElementById("featuredPreprintTitle").textContent = text.featuredPreprintTitle;
+      document.getElementById("awardsTitle").textContent = text.awardsTitle;
+      document.getElementById("footerText").textContent = text.footerText;
+      document.title = currentLang === "zh" ? "李雨晴 | Academic Homepage" : "Yuqing Li | Academic Homepage";
+    }
+
+    function renderNews() {
+      document.getElementById("newsList").innerHTML = siteData.news.map((item) => `<li>${item[currentLang]}</li>`).join("");
+    }
+
+    function renderAwards() {
+      document.getElementById("awardList").innerHTML = siteData.awards.map((item) => `<li>${item[currentLang]}</li>`).join("");
+    }
+
+    function toggleBibtex(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.toggle("show-bibtex");
+      }
+    }
+
+    function buildPaperFigure(paper) {
+      if (!paper.image) {
+        return "";
+      }
+
+      return `
+        <div class="paper-figure">
+          <span class="paper-badge">${paper.badge[currentLang]}</span>
+          <img class="paper-thumb" src="${paper.image}" alt="${paper.title.en || paper.title[currentLang]}" onerror="this.parentElement.classList.add('thumb-failed');">
+          <div class="paper-fallback">
+            <small>${paper.coverLabel[currentLang]}</small>
+            <strong>${paper.shortTitle}</strong>
+            <span>${paper.coverNote[currentLang]}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderFeatured(containerId, papers) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = papers.map((paper, idx) => {
+        const id = `${containerId}-${idx}`;
+        const links = [];
+        const textOnlyClass = paper.image ? "" : " text-only";
+
+        if (paper.paperUrl && paper.paperUrl !== "#") {
+          links.push(`<a href="${paper.paperUrl}" target="_blank" rel="noreferrer">paper</a>`);
+        }
+
+        if (paper.codeUrl && paper.codeUrl !== "#") {
+          links.push(`<a href="${paper.codeUrl}" target="_blank" rel="noreferrer">code</a>`);
+        }
+
+        if (Array.isArray(paper.resourceLinks)) {
+          paper.resourceLinks.forEach((item) => {
+            if (item && item.url) {
+              links.push(`<a href="${item.url}" target="_blank" rel="noreferrer">${item.label}</a>`);
+            }
+          });
+        }
+
+        if (paper.bibtex) {
+          links.push(`<button class="link-btn" type="button" onclick="toggleBibtex('${id}')">bibtex</button>`);
+        }
+
+        return `
+          <article class="paper-card${textOnlyClass}" id="${id}">
+            ${buildPaperFigure(paper)}
+            <div>
+              ${paper.image ? "" : `<span class="paper-inline-badge">${paper.badge[currentLang]}</span>`}
+              <h4 class="paper-title">${paper.title[currentLang]}</h4>
+              <div class="paper-authors">${highlightSelfName(paper.authors[currentLang])}</div>
+              <div class="paper-desc">${paper.summary[currentLang]}</div>
+              <div class="paper-links">${links.join("<span class='sep'>|</span>")}</div>
+              ${paper.bibtex ? `<div class="bibtex">${escapeHtml(paper.bibtex)}</div>` : ""}
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function setupSectionObserver() {
+      if (sectionObserver) {
+        sectionObserver.disconnect();
+      }
+
+      const sections = document.querySelectorAll(".content section");
+      const navLinks = document.querySelectorAll(".nav a:not(.nav-brand)");
+
+      sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+          const id = entry.target.id;
+          navLinks.forEach((link) => {
+            link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+          });
+        });
+      }, { threshold: 0.28 });
+
+      sections.forEach((section) => sectionObserver.observe(section));
+    }
+
+    function renderAll() {
+      document.documentElement.lang = currentLang === "zh" ? "zh-CN" : "en";
+      document.getElementById("langToggle").textContent = currentLang === "zh" ? "English" : "中文";
+      createNav();
+      renderProfile();
+      renderHome();
+      renderStaticText();
+      renderNews();
+      renderFeatured("featuredPreprint", siteData.featuredPreprint);
+      renderFeatured("featuredPublished", siteData.featuredPublished);
+      renderAwards();
+      setupSectionObserver();
+    }
+
+    document.getElementById("langToggle").addEventListener("click", () => {
+      currentLang = currentLang === "zh" ? "en" : "zh";
+      renderAll();
+    });
+
+    renderAll();
+  </script>
+</body>
+</html>
