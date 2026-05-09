@@ -528,8 +528,6 @@
         <h3 class="subsection-title" id="researchTitle"></h3>
         <ul class="compact-list" id="researchList"></ul>
 
-        <h3 class="subsection-title" id="experienceTitle"></h3>
-        <ul class="compact-list" id="experienceList"></ul>
       </section>
 
       <section id="news">
@@ -552,6 +550,11 @@
         <ul class="award-list" id="awardList"></ul>
       </section>
 
+      <section id="experience">
+        <h2 class="section-title"><span class="section-icon">🎓</span><span id="experienceTitle"></span></h2>
+        <ul class="compact-list" id="experienceList"></ul>
+      </section>
+
       <div class="footer" id="footerText"></div>
     </div>
   </main>
@@ -562,16 +565,16 @@
         zh: {
           name: "李雨晴",
           org: "中国科学院信息工程研究所",
-          bio: "博士生",
+          bio: "博士生 · 腾讯微信事业群（WXG）模式识别中心研究实习",
           location: "Beijing, China",
-          tags: ["RAG (记忆增强的检索/重排/生成)", "Agent Memory", "Multimodal Analysis"]
+          tags: ["RAG", "Agent Memory", "Multimodal Analysis"]
         },
         en: {
           name: "Yuqing Li",
           org: "Institute of Information Engineering, Chinese Academy of Sciences",
           bio: "Ph.D. Candidate · Research Intern at Tencent WXG Pattern Recognition Center",
           location: "Beijing, China",
-          tags: ["RAG (Memory-aware Retrieval/Reranker/Generation)", "Agent Memory", "Multimodal Analysis"]
+          tags: ["RAG", "Agent Memory", "Multimodal Analysis"]
         }
       },
       contacts: {
@@ -593,19 +596,21 @@
           { id: "home", label: "About Me" },
           { id: "news", label: "动态" },
           { id: "publications", label: "论文" },
-          { id: "awards", label: "荣誉" }
+          { id: "awards", label: "荣誉" },
+          { id: "experience", label: "经历" }
         ],
         en: [
           { id: "home", label: "About Me" },
           { id: "news", label: "News" },
           { id: "publications", label: "Publications" },
-          { id: "awards", label: "Awards & Highlights" }
+          { id: "awards", label: "Awards & Highlights" },
+          { id: "experience", label: "Experience" }
         ]
       },
       text: {
         zh: {
           homeLead: [
-            "你好！我是<a href='https://www.iie.ac.cn/' target='_blank' rel='noreferrer'>中国科学院信息工程研究所</a>博士生，导师为<a href='https://people.ucas.ac.cn/~linzheng' target='_blank' rel='noreferrer'>林政</a>研究员。目前我在<strong>腾讯微信事业群（WXG）模式识别中心</strong>从事研究实习，Mentor 为 <a href='https://sites.google.com/site/moyunlp/' target='_blank' rel='noreferrer'>Mo Yu</a>。",
+            "你好！我是<a href='https://www.iie.ac.cn/' target='_blank' rel='noreferrer'>中国科学院信息工程研究所</a>博士生，导师是<a href='https://people.ucas.ac.cn/~linzheng' target='_blank' rel='noreferrer'>林政</a>研究员。目前我在<strong>腾讯微信事业群（WXG）模式识别中心</strong>从事研究实习，Mentor 是 <a href='https://sites.google.com/site/moyunlp/' target='_blank' rel='noreferrer'>Mo Yu</a>。",
             "我的研究主要围绕长上下文检索与重排、Agent Memory、以及多模态应用分析展开，尤其关注模型如何更稳定地定位证据、组织长期信息，并在复杂场景中做出更可靠的判断。"
           ],
           researchTitle: "研究兴趣",
@@ -646,18 +651,21 @@
       },
       experience: {
         zh: [
-          "<strong>2025 - 至今 · 腾讯微信事业群（WXG）模式识别中心</strong>，研究实习，Mentor 为 <a href='https://sites.google.com/site/moyunlp/' target='_blank' rel='noreferrer'>Mo Yu</a>。",
-          "<strong>2022 - 2027.6 (Expected) · 中国科学院信息工程研究所</strong>，博士生，导师为林政研究员。",
-          "<strong>2018 - 2022 · 青岛大学</strong>，计算机科学与技术本科。"
+          "<strong>2025.5 - 2026.5 · 腾讯微信事业群（WXG）模式识别中心</strong>，研究实习，Mentor 是 <a href='https://sites.google.com/site/moyunlp/' target='_blank' rel='noreferrer'>Mo Yu</a>。",
+          "<strong>2022.9 - 2027.6 (Expected) · 中国科学院信息工程研究所</strong>，博士生，导师是林政研究员。",
+          "<strong>2018.9 - 2022.6 · 青岛大学</strong>，计算机科学与技术本科。"
         ],
         en: [
-          "<strong>2025 - Present · Tencent WeChat Group (WXG), Pattern Recognition Center</strong>, Research Intern, mentored by <a href='https://sites.google.com/site/moyunlp/' target='_blank' rel='noreferrer'>Mo Yu</a>.",
-          "<strong>2022 - Present · Institute of Information Engineering, CAS</strong>, Ph.D. in Computer Application Technology, advised by Prof. Zheng Lin.",
-          "<strong>2018 - 2022 · Qingdao University</strong>, B.E. in Computer Science and Technology."
+          "<strong>2025.5 - 2026.5 · Tencent WeChat Group (WXG), Pattern Recognition Center</strong>, Research Intern, mentored by <a href='https://sites.google.com/site/moyunlp/' target='_blank' rel='noreferrer'>Mo Yu</a>.",
+          "<strong>2022.9 - 2027.6 (Expected)· Institute of Information Engineering, CAS</strong>, Ph.D. in Computer Application Technology, advised by Prof. Zheng Lin.",
+          "<strong>2018.9 - 2022.6 · Qingdao University</strong>, B.E. in Computer Science and Technology."
         ]
       },
       news: [
         {
+          zh: "<em>2026.05</em>：📝 <strong>MiA-Signature: Approximating Global Activation for Long-Context Understanding</strong> 发布于 <a href='https://arxiv.org/abs/2605.06416' target='_blank' rel='noreferrer'>arXiv</a>。基于认知科学中意识激活理论，利用子模选择构建全局激活压缩表示，提升 RAG 和 Agent 系统的长上下文理解能力。欢迎在 <a href='https://huggingface.co/papers/2605.06416' target='_blank' rel='noreferrer'>Hugging Face</a> upvote 🤗！",
+          en: "<em>2026.05</em>: 📝 <strong>MiA-Signature: Approximating Global Activation for Long-Context Understanding</strong> was released on <a href='https://arxiv.org/abs/2605.06416' target='_blank' rel='noreferrer'>arXiv</a>. Inspired by cognitive science, MiA-Signature builds a compressed global activation representation via submodular concept selection to enhance long-context understanding in RAG and agentic systems. Welcome to upvote on <a href='https://huggingface.co/papers/2605.06416' target='_blank' rel='noreferrer'>Hugging Face</a> 🤗!"
+        },
           zh: "<em>2026.04</em>：🎉 <strong>Situated Embedding Models for Context-Aware Dense Retrieval</strong> 被 <strong>ACL 2026</strong> 主会录用。",
           en: "<em>2026.04</em>: 🎉 <strong>Situated Embedding Models for Context-Aware Dense Retrieval</strong> was accepted to the <strong>ACL 2026</strong> main conference ."
         },
@@ -918,8 +926,12 @@
       const text = siteData.text[currentLang];
       document.getElementById("homeLead").innerHTML = text.homeLead.map((item) => `<p>${item}</p>`).join("");
       document.getElementById("researchTitle").textContent = text.researchTitle;
-      document.getElementById("experienceTitle").textContent = text.experienceTitle;
       document.getElementById("researchList").innerHTML = siteData.research[currentLang].map((item) => `<li>${item}</li>`).join("");
+    }
+
+    function renderExperience() {
+      const text = siteData.text[currentLang];
+      document.getElementById("experienceTitle").textContent = text.experienceTitle;
       document.getElementById("experienceList").innerHTML = siteData.experience[currentLang].map((item) => `<li>${item}</li>`).join("");
     }
 
@@ -1044,6 +1056,7 @@
       renderFeatured("featuredPreprint", siteData.featuredPreprint);
       renderFeatured("featuredPublished", siteData.featuredPublished);
       renderAwards();
+      renderExperience();
       setupSectionObserver();
     }
 
