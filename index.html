@@ -563,14 +563,14 @@
         zh: {
           name: "李雨晴",
           org: "中国科学院信息工程研究所",
-          bio: "博士生",
+          bio: "博士生 · 腾讯 CSIG-元宝 Team（青云计划）研究实习",
           location: "Beijing, China",
           tags: ["RAG (记忆增强的检索/重排/生成)", "Agent Memory", "Multimodal Analysis"]
         },
         en: {
           name: "Yuqing Li",
           org: "Institute of Information Engineering, Chinese Academy of Sciences",
-          bio: "Ph.D. Candidate · Tencent Yuanbao Qingyun Project",
+          bio: "Ph.D. Candidate · Research Intern at Tencent Yuanbao Qingyun Project",
           location: "Beijing, China",
           tags: ["RAG (Memory-aware Retrieval/Reranker/Generation)", "Agent Memory", "Multimodal Analysis"]
         }
@@ -649,13 +649,13 @@
       },
       experience: {
         zh: [
-          "<strong>2026.07 - 至今 · 腾讯 CSIG-元宝 Team（青云计划）</strong>，从事 personalized memory 相关工作。",
+          "<strong>2026.07 - 至今 · 腾讯 CSIG-元宝 Team（青云计划）</strong>，研究实习，从事 personalized memory 相关工作。",
           "<strong>2025.05 - 2026.07 · 腾讯微信事业群（WXG）模式识别中心</strong>，研究实习，Mentor 为 <a href='https://sites.google.com/site/moyunlp/' target='_blank' rel='noreferrer'>Mo Yu</a>。",
           "<strong>2022.09 - 2027.06 (Expected) · 中国科学院信息工程研究所</strong>，博士生（硕博连读），导师为林政研究员",
           "<strong>2018.09 - 2022.06 · 青岛大学</strong>，计算机科学与技术学士。"
         ],
         en: [
-          "<strong>2026.07 - Present · Tencent CSIG-Yuanbao Team (Qingyun Program)</strong>, working on personalized memory.",
+          "<strong>2026.07 - Present · Tencent CSIG-Yuanbao Team (Qingyun Program)</strong>, Research Intern, working on personalized memory.",
           "<strong>2025.05 - 2026.07 · Tencent WeChat Group (WXG), Pattern Recognition Center</strong>, Research Intern, mentored by <a href='https://sites.google.com/site/moyunlp/' target='_blank' rel='noreferrer'>Mo Yu</a>.",
           "<strong>2022.09 - 2027.06 (Expected) · Institute of Information Engineering, CAS</strong>, Ph.D. in Computer Application Technology (direct program), advised by Prof. Zheng Lin.",
           "<strong>2018.09 - 2022.06 · Qingdao University</strong>, B.E. in Computer Science and Technology."
@@ -663,8 +663,12 @@
       },
       news: [
         {
-          zh: "<em>2026.07</em>：🎆 加入 <strong>腾讯 CSIG-元宝 Team（青云计划）</strong>，从事 <strong>personalized memory</strong> 相关工作。",
-          en: "<em>2026.07</em>: 🎆 I joined the <strong>Tencent CSIG-Yuanbao Team (Qingyun Project)</strong>, working on <strong>personalized memory</strong>."
+          zh: "<em>2026.07</em>：📝 <strong>A New Role for Relevance: Guiding Corpus Interaction in Agentic Search</strong> 发布于 <a href='https://arxiv.org/abs/2607.24223' target='_blank' rel='noreferrer'>arXiv</a>，并入选 <a href='https://huggingface.co/papers/2607.24223' target='_blank' rel='noreferrer'>Hugging Face Daily Paper #3</a>。",
+          en: "<em>2026.07</em>: 📝 <strong>A New Role for Relevance: Guiding Corpus Interaction in Agentic Search</strong> was released on <a href='https://arxiv.org/abs/2607.24223' target='_blank' rel='noreferrer'>arXiv</a> and selected as <a href='https://huggingface.co/papers/2607.24223' target='_blank' rel='noreferrer'>Hugging Face Daily Paper #3</a>."
+        },
+        {
+          zh: "<em>2026.07</em>：🎆 加入 <strong>腾讯 CSIG-元宝 Team（青云计划）</strong>，研究实习，从事 <strong>personalized memory</strong> 相关工作。",
+          en: "<em>2026.07</em>: 🎆 I joined the <strong>Tencent CSIG-Yuanbao Team (Qingyun Project)</strong> as a <strong>Research Intern</strong>, working on <strong>personalized memory</strong>."
         },
         {
           zh: "<em>2026.05</em>：📝 <strong>MiA-Signature: Approximating Global Activation for Long-Context Understanding</strong> 发布于 <a href='https://arxiv.org/abs/2605.06416' target='_blank' rel='noreferrer'>arXiv</a>。基于认知科学中意识激活理论，利用子模选择构建全局激活压缩表示，提升 RAG 和 Agent 系统的长上下文理解能力。欢迎在 <a href='https://huggingface.co/papers/2605.06416' target='_blank' rel='noreferrer'>Hugging Face</a> upvote 🤗！",
@@ -724,6 +728,30 @@
         }
       ],
       featuredPreprint: [
+        {
+          image: "img/rarg.png",
+          badge: { zh: "arXiv 2026", en: "arXiv 2026" },
+          coverLabel: { zh: "Agent Search", en: "Agent Search" },
+          shortTitle: "RARG",
+          coverNote: { zh: "Relevance-aware corpus interaction", en: "Relevance-aware corpus interaction" },
+          title: {
+            zh: "A New Role for Relevance: Guiding Corpus Interaction in Agentic Search",
+            en: "A New Role for Relevance: Guiding Corpus Interaction in Agentic Search"
+          },
+          authors: {
+            zh: "Jiangnan Li*, Yuqing Li*",
+            en: "Jiangnan Li*, Yuqing Li*"
+          },
+          summary: {
+            zh: "现有检索 Agent 多用 relevance 做 top-k 内容筛选，却难以在 corpus interaction 中定位、组合与验证证据。RARG 将 relevance 转化为 ripgrep 执行先验：按文档相关度排序遍历、用相关段落初始化入口，并对 grep 匹配结果重排，从而更快、更稳地收敛到可用证据。",
+            en: "Retrieval agents often use relevance only for top-k selection, which is insufficient for localizing, composing, and verifying evidence during corpus interaction. RARG turns relevance into an execution prior for ripgrep: ranking documents for traversal, seeding query-relevant entry points, and reranking grep matches to reach useful evidence earlier and more reliably."
+          },
+          paperUrl: "https://arxiv.org/abs/2607.24223",
+          codeUrl: "https://github.com/LeqsNaN/RARG",
+          resourceLinks: [
+            { label: "HF Daily #3", url: "https://huggingface.co/papers/2607.24223" }
+          ]
+        },
         {
           image: "img/mia-signature.png",
           badge: { zh: "arXiv 2026", en: "arXiv 2026" },
