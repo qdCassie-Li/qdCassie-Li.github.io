@@ -745,6 +745,30 @@
       ],
       featuredPreprint: [
         {
+          image: "img/mllm-retrieval-heads.png",
+          badge: { zh: "arXiv 2026", en: "arXiv 2026" },
+          coverLabel: { zh: "多模态检索", en: "Multimodal Retrieval" },
+          shortTitle: "MLLM Retrieval Heads",
+          coverNote: { zh: "跨模态检索机制", en: "Cross-modal retrieval mechanism" },
+          title: {
+            zh: "A Broader Look into MLLM's Retrieval Heads",
+            en: "A Broader Look into MLLM's Retrieval Heads"
+          },
+          authors: {
+            zh: "Jia Wang*, Yuqing Li*, Jiangnan Li*, Zheng Lin†, Mo Yu",
+            en: "Jia Wang*, Yuqing Li*, Jiangnan Li*, Zheng Lin†, Mo Yu"
+          },
+          summary: {
+            zh: "将 retrieval-head 分析扩展至音频、视觉与文本等多模态输入。对 18 个 language、vision-language 和 omni-modal checkpoints 的研究表明，retrieval heads 在新模态中仍高度稀疏，并在不同模态及相关 backbone 间广泛共享和保留；进一步以 ranking objective 优化这些 heads 的 attention，在 MMDocIR 上将 Qwen3-VL-8B 的 page Recall@1 提升 6.03 个百分点。",
+            en: "We extend retrieval-head analysis across audio, visual, and textual inputs. Across 18 language, vision-language, and omni-modal checkpoints, retrieval heads remain sparse and are widely shared across modalities and preserved from related backbones; directly optimizing their attention with a ranking objective improves Qwen3-VL-8B page Recall@1 on MMDocIR by 6.03 points."
+          },
+          paperUrl: "https://arxiv.org/abs/2610.32411",
+          codeUrl: "#",
+          resourceLinks: [
+            { label: "HF Paper", url: "https://huggingface.co/papers/2610.32411" }
+          ]
+        },
+        {
           image: "img/rarg.png",
           badge: { zh: "arXiv 2026", en: "arXiv 2026" },
           coverLabel: { zh: "Agent Search", en: "Agent Search" },
